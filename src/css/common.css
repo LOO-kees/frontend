@@ -1,0 +1,490 @@
+@charset "UTF-8";
+
+/* 공통서식 */
+
+/* *{margin: 0;padding: 0;} */
+
+/* 기존 header 마진은 그대로 두고… */
+.header_style {
+  margin-left: 20px;
+}
+
+/* nav 만 화면 양쪽 끝까지 펼치기 */
+.nav_style {
+  background-color: #0475FF;
+  /* header의 20px 마진을 취소하기 위해 좌우에 -20px */
+  margin: 20px -20px;
+  /* 위아래 20px 여백 */
+  padding: 20px 0;
+}
+
+/* nav 안 텍스트 블록은 다시 20px 들여쓰기 */
+.nav_txt {
+  margin-left: 20px;
+}
+
+/* 링크 스타일 */
+.nav_txt a {
+  color: #fff;            /* 글자색 흰색 */
+  text-decoration: none;  /* 밑줄 없애기 */
+  margin-left: 20px;      /* 링크 간격 */
+}
+
+/* 첫 번째 링크만 마진 없애기 */
+.nav_txt a:first-child {
+  margin-left: 0;
+}
+
+.main_style{
+  margin-left: 20px;
+}
+.footer_style{
+  background-color: #212529;
+  color: #fff;
+  padding: 30px 0;
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* 공통 테이블 서식 */
+.common_table caption {
+  font-size: 2em;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.common_table table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.common_table table,
+.common_table th,
+.common_table td {
+  border: 1px solid #ccc;
+}
+
+.common_table thead th {
+  background-color: #0475FF;
+  color: #fff;
+  padding: 4px 3px;
+}
+
+.common_table tbody td {
+  padding: 4px 3px;
+  text-align: center;
+}
+
+.common_table .register-btn {
+  background-color: #0475FF;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+/* 공통 폼 서식 */
+/* Form container */
+.common_form form {
+  background: #fff;                     /* bg-white */
+  border-radius: .25rem;                /* rounded */
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);  /* shadow */
+  padding: 1.5rem;                      /* p-4 */
+  width: 600px;                         /* 인라인 style 을 여기에 몰아넣음 */
+  margin: 0 auto 2rem;                  /* 가운데 정렬 + 아래 여백 */
+}
+
+/* 제목 */
+.common_form h2 {
+  text-align: center;                   /* text-center */
+  margin-bottom: 1.5rem;                /* mb-4 */
+}
+
+/* legend */
+.common_form fieldset legend {
+  font-weight: 700;                     /* fw-bold */
+  margin-bottom: 1rem;                  /* mb-3 */
+}
+
+/* inputs & selects */
+.common_form input,
+.common_form select {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;              /* form-control & form-select */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+/* 버튼 그룹 (데이터입력 + 리셋) */
+.common_form .btn-group {
+  display: flex;                        /* d-flex */
+  justify-content: space-between;      /* justify-content-between */
+  margin-bottom: 1rem;
+}
+
+/* 버튼 공통 */
+.common_form .btn {
+  display: inline-block;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+/* 버튼 색상 */
+.common_form .btn-primary {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+.common_form .btn-secondary {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+.common_form .btn-dark {
+  background: #212529;
+  border-color: #212529;
+  color: #fff;
+}
+
+/* 전체 폭 버튼 (출력화면보기) */
+.common_form .w-100 {
+  width: 100%;
+  display: block;
+}
+
+
+/* 페이지 버튼 이전 다음 서식 */
+.common_table .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 이전/다음 버튼에 고정 폭 */
+.common_table .pagination .page-btn {
+  flex: 0 0 60px;       /* 너비 고정 (필요에 따라 조절) */
+  height: 36px;         /* 높이 고정 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.common_table .pagination .page-btn:disabled {
+  visibility: hidden;   /* 공간은 그대로 */
+}
+
+/* 가운데 페이지 번호 그룹 */
+.common_table .pagination .pages {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex: 0 0 auto;       /* ← 새로 추가: 고정 폭(container 폭 = min-width 만큼) */
+  min-width: calc(5 * 36px + 4 * 8px);
+}
+
+/* 페이지 번호 버튼 기본 스타일 */
+.common_table .pagination .pages button {
+  min-width: 36px;
+  padding: 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* 활성 페이지 표시 */
+.common_table .pagination .pages button.active {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+
+/*————— QnQ 전용 문의 폼 —————*/
+.qnq_form {
+  background: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  width: 900px;
+  max-width: 100%;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* 헤딩 중앙 정렬 */
+.qnq_form h2 {
+  text-align: center;
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* 좌/우 컬럼 나란히 */
+.qnq_form .left_form,
+.qnq_form .right_form {
+  float: left;
+  box-sizing: border-box;
+}
+.qnq_form .left_form {
+  width: 28%;
+  margin-right: 4%;
+}
+.qnq_form .right_form {
+  width:68%;
+}
+
+/* 각 필드 간 여백 */
+.qnq_form p {
+  margin: 0 0 1.5rem;
+}
+
+/* 레이블 스타일 */
+.qnq_form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* 인풋·텍스트에어리어 기본 스타일 */
+.qnq_form input[type="text"],
+.qnq_form input[type="email"],
+.qnq_form textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+.qnq_form textarea {
+  min-height: 180px;
+  resize: none;
+}
+
+/* 체크박스 영역은 두 컬럼 아래로 내려줌 */
+.qnq_form > section > div:not(.left_form):not(.right_form):not(.btn-group) {
+  clear: both;
+  margin-bottom: 1rem;
+}
+.qnq_form input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* 보내기 버튼 */
+.qnq_form .btn-group {
+  clear: both;
+  margin-top: 1rem;
+}
+.qnq_form .btn-group input[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #0d6efd;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+/* 1) 체크박스 컨테이너에 float 해제 및 flex 정렬 */
+.qnq_form > section > div:not(.left_form):not(.right_form):not(.btn-group) {
+  clear: both;              /* 좌·우 컬럼 아래로 내림 */
+  display: flex;            /* 체크박스와 라벨을 한 줄에 */
+  align-items: center;      /* 세로 중앙 정렬 */
+  margin: 2rem 0;           /* 위아래 여백 */
+}
+
+/* 2) 기존 인풋 block 스타일이 checkbox 에도 먹는 걸 막고, inline-block 으로 */
+.qnq_form input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  margin: 0 .5rem 0 0;      /* 라벨과 간격 */
+  vertical-align: middle;
+}
+
+/* 3) 라벨 마진 리셋 (필요 시) */
+.qnq_form label[for="agree"] {
+  margin-right: 1rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* 체크박스 + 라벨 래퍼 */
+.qnq_form .agree_wrap {
+  clear: both;          /* 좌/우 컬럼 바로 아래로 내리기 */
+  display: flex;        /* 체크박스와 라벨을 한 줄에 */
+  align-items: center;  /* 수직 중앙 정렬 */
+  margin: 1.5rem 0;     /* 위·아래 여백 */
+}
+
+/* 체크박스 */
+.qnq_form .agree_wrap input[type="checkbox"] {
+  margin: -0.3rem 0 0 -0.6rem; 
+  flex-shrink: 0;       /* 줄어들지 않게 */
+  width: auto;
+}
+
+/* 라벨 */
+.qnq_form .agree_wrap label {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+
+/*————— Login 전용 폼 —————*/
+.login_form {
+  background: #fff;                             /* 흰 배경 */
+  border-radius: .25rem;                        /* 둥근 모서리 */
+  width: 600px;                                 /* 폼 너비 */
+  max-width: 100%;                              /* 모바일 대응 */
+  margin: 0 auto 2rem;                          /* 가운데 정렬 + 아래 여백 */
+  padding: 1.5rem;                              /* 내부 여백 */
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.login_form h2 {
+  text-align: center;                           /* 제목 중앙 정렬 */
+  margin-bottom: 1.5rem;                        /* 아래 여백 */
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.login_form p {
+  margin: 0 0 1rem;                             /* 줄 간격 */
+}
+.log_p_center{
+  text-align: center;
+}
+
+.log_p_center a{
+  text-decoration: none;
+  color: #333;
+} 
+
+.login_form label {
+  display: block;
+  margin-bottom: .5rem;
+  font-size: .875rem;
+  color: #555;
+}
+
+.login_form input[type="text"],
+.login_form input[type="password"] {
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.login_form input[type="submit"], .reg_btn {
+  width: 100%;
+  padding: .75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #0d6efd;
+  border: none;
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: filter 0.2s ease
+}
+
+.login_form input[type="submit"]:hover, .reg_btn:hover{
+  filter: brightness(0.88);
+}
+
+.login_form .reset_btn {
+  background-color: #6c757d;    /* secondary 버튼 느낌 */
+  color: #fff;
+  border: none;                 /* .common_form input 테두리 덮어쓰기 */
+  width: 100%;
+  padding: .75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: .25rem;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.login_form .reset_btn:hover {
+  filter: brightness(0.88);
+}
+
+.login_form dl {
+  margin-top: 1rem;
+}
+
+.login_form dl dt {
+  font-size: .875rem;
+  margin-bottom: .25rem;
+  color: #555;
+}
+
+
+
+/* ---------- 간편 로그인 버튼 ---------- */
+.sns_login {
+  display: flex;
+  justify-content: center;
+  gap: 16px;                 /* 버튼 간 여백 */
+  margin: 1.5rem 0;
+}
+
+.sns_login li { list-style: none; }
+
+/* ① 버튼 크기를 a 태그에 고정 */
+.sns_btn {
+  display: block;            /* 한 덩어리 클릭 영역 */
+  width: 200px;              /* 원하는 버튼 폭 */
+  height: 52px;              /* 원하는 버튼 높이 */
+  border-radius: 6px;
+  overflow: hidden;          /* 내부 이미지가 넘치지 않도록 */
+  transition: filter 0.2s ease
+}
+
+/* ② 내부 이미지는 컨테이너를 100% 채움 */
+.sns_btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* 비율 유지하며 꽉 채우기(여백 최소화) */
+  display: block;
+}
+
+/* ③ hover 시 살짝 어둡게 + 미세 확대 */
+.sns_btn:hover {
+  filter: brightness(0.88);
+}
