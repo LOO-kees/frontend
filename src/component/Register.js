@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+// ★ useNavigate 추가
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   // 1) 상태 변수 선언
@@ -12,6 +14,9 @@ function Register() {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  // ★ useNavigate 훅 호출
+  const navigate = useNavigate();
 
   // 2) 백엔드 Public URL 설정
   // 로컬 개발/테스트 시:
@@ -43,9 +48,9 @@ function Register() {
       });
 
       if (res.data.success) {
-        //  alert 창 뜨도록 변경
+        // ★ alert 창 뜨도록 변경
         alert('회원가입 완료! 이제 로그인 해주세요.');
-        //  로그인 페이지로 이동
+        // ★ 로그인 페이지로 이동
         navigate('/login');
 
         // (선택) 입력 폼 초기화
