@@ -14,10 +14,13 @@ function Books(props) {
   // AlertContext에서 setBooksCount 함수 읽어오기
   const { setBooksCount } = useContext(AlertContext);
 
+    // AlertContext에서 setBooksCount 함수 읽어오기
+  const { setBooksCount } = useContext(AlertContext);
+
   // 5. 데이터 로드
   const loadData = useCallback(() => {
     axios
-      .get('http://localhost:9070/books')
+      .get(`${BACKEND_URL}/books`)
       .then(res => {
         setData(res.data);
         setBooksCount(res.data.length); // 알림 개수 업데이트
@@ -47,7 +50,7 @@ function Books(props) {
   const deleteData = (num) => {
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
     axios
-      .delete(`http://localhost:9070/books/${num}`)
+      .delete(`${BACKEND_URL}/books/${num}`)
       .then(() => {
         alert('삭제되었습니다.');
         loadData();
