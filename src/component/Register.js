@@ -43,7 +43,12 @@ function Register() {
       });
 
       if (res.data.success) {
-        setSuccess('회원가입 완료! 이제 로그인 해주세요.');
+        //  alert 창 뜨도록 변경
+        alert('회원가입 완료! 이제 로그인 해주세요.');
+        //  로그인 페이지로 이동
+        navigate('/login');
+
+        // (선택) 입력 폼 초기화
         setForm({ username: '', password: '', confirmPassword: '' });
       }
     } catch {
