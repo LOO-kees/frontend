@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const FruitsCreate = () => {
-
-  //1. 상태변수를 선언하여 사용자가 입력한 값을 저장한다.
-  const [form, setForm] = useState({ 
+  // 1. 상태변수 선언 (사용자가 입력한 값을 저장)
+  const [form, setForm] = useState({
     name: '',
     price: '',
     color: '',
     country: ''
   });
 
-  //url주소를 입력하여 요청을 했을 경우 실행.
   const navigate = useNavigate();
 
-  //사용자가 입력을 하면 함수가 호출되어 기존 데이터에 추가 저장
+  // 2. 백엔드 Public URL 설정
+  // 로컬 개발/테스트 시:
+  // const BACKEND_URL = 'http://localhost:9070';
+  // 배포 상태(CloudType)에서는 Public URL 사용:
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
+  // 3. 입력값 변경 시 상태 업데이트
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -23,20 +27,15 @@ const FruitsCreate = () => {
     });
   };
 
-  //상품등록버튼 클릭시 실행되는 함수
+  // 4. “상품등록” 버튼 클릭 시 POST 요청
   const handleSubmit = (e) => {
-    e.preventDefault(); //새로고침 방지
-
-    //axios를 사용하여 post방식으로 서버에 데이터를 전송한다.
-    //택배를 포장하여 편의점에 맡긴다.
-    axios.post('http://localhost:9070/fruits', form) //서버측에 form데이터 전송
-    
-    //전송 성공시 실행할 내용
-    .then(() => {
+    e.preventDefault();
+    axios
+      .post(`${BACKEND_URL}/fruits`, form)
+      .then(() => {
         alert('상품등록이 완료되었습니다.');
-        navigate('/fruits'); // 데이터 전송이 끝나고 연결되는 페이지 주소임.
+        navigate('/fruits');
       })
-      //실패시 실행할 내용
       .catch(err => console.log(err));
   };
 
