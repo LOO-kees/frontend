@@ -18,10 +18,16 @@ function BooksUpdate() {
 
   const navigate = useNavigate();
 
+   // 3. 백엔드 주소 설정
+  // 로컬 개발 시:
+  // const BACKEND_URL = 'http://localhost:9070';
+  // 배포된 CloudType Public URL 사용 시:
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
   //2. 서버측에 넘길 데이터(num)를 통신해서 성공, 실패여부 출력
   useEffect(() => {
     axios
-      .get(`http://localhost:9070/books/${num}`)
+      .get(`${BACKEND_URL}/books/${num}`)
       .then(res => {
         console.log('서버 응답값(book 상세):', res.data);
         setForm(res.data);
@@ -41,7 +47,7 @@ function BooksUpdate() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:9070/books/update/${num}`, form)
+      .put(`${BACKEND_URL}/books/update/${num}`, form)
       .then(() => {
         alert('도서정보가 수정 완료되었습니다.');
         navigate('/books');
