@@ -18,10 +18,9 @@ function BooksUpdate() {
 
   const navigate = useNavigate();
 
-   // 3. 백엔드 주소 설정
-  // 로컬 개발 시:
+// 3. 배포된 백엔드 Public URL(CloudType 주소)을 상수로 선언
+  // (로컬 테스트할 때는 아래 줄을 주석 처리하고, 필요 시 'http://localhost:9070'을 사용)
   // const BACKEND_URL = 'http://localhost:9070';
-  // 배포된 CloudType Public URL 사용 시:
   const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
 
   //2. 서버측에 넘길 데이터(num)를 통신해서 성공, 실패여부 출력
