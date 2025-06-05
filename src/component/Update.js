@@ -13,9 +13,13 @@ function Update() {
 
   const navigate = useNavigate();
 
+  //3) 백엔드 주소 지정
+  // const BACKEND_URL = 'http://localhost:9070';  // 로컬 개발용
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';  // CloudType 배포용
+
   //2. 서버측에 넘길 데이터(g_code)를 통신해서 성공, 실패여부 출력
   useEffect(()=>{
-    axios.get(`http://localhost:9070/goods/${g_code}`)
+    axios.get(`${BACKEND_URL}/goods/${g_code}`)
     //성공이면 출력
     .then(res=>{
       console.log('서버 응답값 : ', res.data);
@@ -40,7 +44,7 @@ function Update() {
   const handleSubmit=(e)=>{  
     e.preventDefault();
 
-    axios.put(`http://localhost:9070/goods/update/${g_code}`,{
+    axios.put(`${BACKEND_URL}/goods/update/${g_code}`,{
       g_name:form.g_name, //상품명 저장
       g_cost:form.g_cost //상품가격 저장
     })
