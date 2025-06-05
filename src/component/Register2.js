@@ -1,9 +1,9 @@
+// src/component/Register2.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
 function Register2(props) {
-
-  // 1. 상태변수
+  // 1. 상태 변수 선언
   const [form, setForm] = useState({
     username: '',
     password: '',
@@ -14,13 +14,19 @@ function Register2(props) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // 2. 입력 핸들러
+  // 2. 백엔드 Public URL 설정
+  // 로컬 개발/테스트 시:
+  // const BACKEND_URL = 'http://localhost:9070';
+  // 배포된 CloudType Public URL 사용:
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
+  // 3. 입력 핸들러
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError('');
   };
 
-  // 3. 제출(회원가입)
+  // 4. 회원가입 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,7 +37,8 @@ function Register2(props) {
     }
 
     try {
-      const res = await axios.post('http://localhost:9070/register2', {
+      // axios.post 시 BACKEND_URL로 변경
+      const res = await axios.post(`${BACKEND_URL}/register2`, {
         username: form.username,
         password: form.password,
         email: form.email,
@@ -54,9 +61,9 @@ function Register2(props) {
     }
   };
 
-  // 4. 리셋 핸들러
+  // 5. 리셋 핸들러 (양식 초기화)
   const handleReset = (e) => {
-    e.preventDefault();  // 필요 없으면 제거 가능
+    e.preventDefault();
     setForm({
       username: '',
       password: '',
@@ -142,7 +149,7 @@ function Register2(props) {
             <input className="reset_btn" type="reset" value="가입취소" />
           </p>
 
-          {error   && <p style={{ color: 'red'   }}>{error}</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           {success && <p style={{ color: 'green' }}>{success}</p>}
         </form>
       </section>
