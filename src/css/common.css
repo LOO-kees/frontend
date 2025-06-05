@@ -180,16 +180,20 @@
 
 /* 이전/다음 버튼에 고정 폭 */
 .common_table .pagination .page-btn {
-  flex: 0 0 60px;       /* 너비 고정 (필요에 따라 조절) */
-  height: 36px;         /* 높이 고정 */
+  width: 36px;           /* 가로 고정 */
+  height: 36px;          /* 세로 고정 */
+  box-sizing: border-box;/* border 두께가 width/height에 포함되도록 */
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #f0f0f0;
   cursor: pointer;
+  display: flex;         /* 글자를 가로·세로 중앙에 배치 */
+  align-items: center;
+  justify-content: center;
 }
 
 .common_table .pagination .page-btn:disabled {
-  visibility: hidden;   /* 공간은 그대로 */
+  visibility: hidden;    /* 공간은 그대로 유지 */
 }
 
 /* 가운데 페이지 번호 그룹 */
@@ -197,18 +201,22 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  flex: 0 0 auto;       /* ← 새로 추가: 고정 폭(container 폭 = min-width 만큼) */
-  min-width: calc(5 * 36px + 4 * 8px);
+  flex: 0 0 auto;        /* 고정 폭 */
 }
 
 /* 페이지 번호 버튼 기본 스타일 */
 .common_table .pagination .pages button {
-  min-width: 36px;
-  padding: 0 8px;
+  width: 36px;           /* 가로 고정 */
+  height: 36px;          /* 세로 고정 */
+  box-sizing: border-box;/* border 두께가 width/height에 포함되도록 */
   border: 1px solid #ccc;
   border-radius: 4px;
   background: #fff;
   cursor: pointer;
+  display: flex;         /* 숫자를 가로·세로 중앙에 배치 */
+  align-items: center;
+  justify-content: center;
+  padding: 0;            /* 불필요한 패딩 제거 */
 }
 
 /* 활성 페이지 표시 */
