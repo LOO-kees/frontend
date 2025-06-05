@@ -1,72 +1,65 @@
-// src/component/Fruits.js
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AlertContext } from '../AlertContext';
 
 function Fruits(props) {
-  //1. 상태변수 선언
+  // 1. 상태변수 선언
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  // AlertContext에서 setFruitsCount 함수 읽어오기
+  // AlertContext에서 setFruitsCount 함수 읽어오기 (한 번만 선언)
   const { setFruitsCount } = useContext(AlertContext);
 
-  //페이지 번호 저장을 위한 상태 변수 선언
-  const [currentPage, setCurrentPage] = useState(1); //초기값
-  const itemsPerPage = 5; //한 페이지에 보여지는 게시물 개수
+  // 페이지 번호 저장을 위한 상태 변수 선언
+  const [currentPage, setCurrentPage] = useState(1); // 초기값
+  const itemsPerPage = 5; // 한 페이지에 보여지는 게시물 개수
 
-  //2. 상품 리스트 조회(출력)
+  // 2. 백엔드 Public URL 설정
+  // 로컬에서 개발/테스트할 때만 아래 줄을 주석 해제하세요:
+  // const BACKEND_URL = 'http://localhost:9070';
+  // 배포 상태(CloudType)에서는 Public URL을 사용합니다:
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
+  // 3. 상품 리스트 조회 (GET /fruits)
   const loadData = useCallback(() => {
-    //React비동기 통신
     axios
-      //DB에서 json데이터를 불러온다.
-      .get('http://localhost:9070/fruits')
-      //성공시 데이터를 변수에 저장하고 알림 개수 업데이트
+      .get(`${BACKEND_URL}/fruits`)
       .then(res => {
         setData(res.data);
         setFruitsCount(res.data.length);
       })
-      //실패시 에러 출력
       .catch(err => console.log(err));
   }, [setFruitsCount]);
 
-  //리액트 훅인 useEffect를 사용하여 컴포넌트가 처음 마운트 되었을 경우에만 loadData()함수를 실행함.
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  //페이지 계산공식 현재 게시물 수 56개 / 5 = 11페이지
+  // 4. 페이지 계산: indexOfLast, indexOfFirst, slice
   const indexOfLast = currentPage * itemsPerPage;
-
-  //현재 페이지의 첫 인덱스 번호를 계산 10 - 5 = 5;
-  const indexOfFirst = indexOfLast - itemsPerPage; // ← 변수명 오타 수정
-
-  //data배열 중 현재 페이지에 해당하는 부분만 잘라냅니다.
-  //예 : data.slice(5, 10) -> data[5],data[6],data[7],data[8],data[9]만 화면에 표시
+  const indexOfFirst = indexOfLast - itemsPerPage;
   const currentItems = data.slice(indexOfFirst, indexOfLast);
 
-  //전체 페이지 수 totalPage - Math.ceil(13 / 5) =3, 무조건 올림
+  // 5. 전체 페이지 수 계산
   const totalPage = Math.ceil(data.length / itemsPerPage);
 
-  //시작번호와 끝번호를 계산 해야 한다.
-  let startPage = Math.max(1, currentPage-2);
-  let lastPage  = Math.min(totalPage, startPage + 4); 
-
-  //페이지 번호 배열 (1~5를 동적으로 변환되도록 변경)
+  // 6. 페이지 번호 그룹 계산 (예: currentPage 기준으로 5개씩)
+  let startPage = Math.max(1, currentPage - 2);
+  let lastPage = Math.min(totalPage, startPage + 4);
   const pageNumbers = Array.from(
     { length: lastPage - startPage + 1 },
     (_, i) => startPage + i
   );
 
-  //삭제
+  // 7. 삭제 (DELETE /fruits/:num)
   const deleteData = (num) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       axios
-        .delete(`http://localhost:9070/fruits/${num}`)
+        .delete(`${BACKEND_URL}/fruits/${num}`)
         .then(() => {
           alert('삭제되었습니다.');
-          loadData(); // 삭제 후 목록 갱신
+          loadData();
         })
         .catch(err => console.log(err));
     }
