@@ -11,6 +11,12 @@ const BooksCreate = () => {
   //url주소관리
   const navigate = useNavigate();
 
+    // 3) 백엔드 주소 설정
+  // 개발 시 로컬 백엔드 사용:
+//  const BACKEND_URL = 'http://localhost:9070';
+  // 배포 시 CloudType에 올라간 백엔드 Public URL 사용:
+  const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
+
   //사용자가 입력박스에 입력하면 함수 호출
   const handleChange = (e) => {
     setForm({
@@ -23,7 +29,7 @@ const BooksCreate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:9070/books', form)
+      .post(`${BACKEND_URL}/books`, form)
       .then(() => {
         alert('도서가 등록되었습니다.');
         navigate('/books');
