@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+// ★ useNavigate 추가
+import { useNavigate } from 'react-router-dom';
 
 function Register2(props) {
   // 1) 상태 변수 선언
@@ -14,6 +16,9 @@ function Register2(props) {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  //  useNavigate 훅 호출
+  const navigate = useNavigate();
 
   // 2) 백엔드 Public URL 설정
   // 로컬 개발/테스트 시:
@@ -47,7 +52,12 @@ function Register2(props) {
       });
 
       if (res.data.success) {
-        setSuccess('회원가입 완료! 이제 로그인 해주세요.');
+        // 회원가입 성공 시 alert 창 띄우기
+        alert('회원가입 완료! 이제 로그인 해주세요.');
+        // 로그인 페이지로 이동
+        navigate('/login');
+
+        // (선택) 입력 폼 초기화
         setForm({
           username: '',
           password: '',
@@ -78,7 +88,12 @@ function Register2(props) {
   return (
     <section>
       <h2>회원가입</h2>
-      <form onSubmit={handleSubmit} onReset={handleReset} className="common_form login_form">
+      {/* onSubmit과 onReset 핸들러 연결 */}
+      <form
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+        className="common_form login_form"
+      >
         <p>
           <label htmlFor="username">아이디 : </label>
           <input
@@ -140,6 +155,7 @@ function Register2(props) {
           />
         </p>
         <p>
+          {/* submit, reset 버튼 */}
           <input className="reg_btn" type="submit" value="회원가입" />
           <input className="reset_btn" type="reset" value="가입취소" />
         </p>
