@@ -180,7 +180,7 @@
 
 /* 이전/다음 버튼에 고정 폭 */
 .common_table .pagination .page-btn {
-  width: 36px;           /* 가로 고정 */
+  width: 50px;           /* 가로 고정 (이전/다음 글자가 한 줄에 표시되도록 충분한 너비로 조정) */
   height: 36px;          /* 세로 고정 */
   box-sizing: border-box;/* border 두께가 width/height에 포함되도록 */
   border: 1px solid #ccc;
@@ -202,6 +202,7 @@
   justify-content: center;
   gap: 8px;
   flex: 0 0 auto;        /* 고정 폭 */
+  margin: 0 12px;        /* 이전/다음 버튼과의 간격을 띄움 */
 }
 
 /* 페이지 번호 버튼 기본 스타일 */
