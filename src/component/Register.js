@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-// ★ useNavigate 추가
+//  useNavigate 추가
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -15,7 +15,7 @@ function Register() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // ★ useNavigate 훅 호출
+  //  useNavigate 훅 호출
   const navigate = useNavigate();
 
   // 2) 백엔드 Public URL 설정
