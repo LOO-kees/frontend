@@ -1,35 +1,39 @@
 // src/component/Login2.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login2(props) {
-  // 1. 상태 변수 선언
+  // 1) 상태 변수 선언
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // 2. 백엔드 Public URL 설정
-  // 로컬 개발/테스트 시:
+  // 2) 백엔드 Public URL 설정
+  // 개발 시 로컬 테스트하려면 아래 주석을 해제:
   // const BACKEND_URL = 'http://localhost:9070';
-  // 배포된 CloudType Public URL 사용:
+  // 배포 시(CloudType)에는 Public URL을 사용:
   const BACKEND_URL = 'https://port-0-backend-mbioc25168a38ca1.sel4.cloudtype.app';
 
-  // 3. 입력 핸들러
+  // 3) 입력 핸들러
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError('');
   };
 
-  // 4. 로그인 제출 핸들러
+  // 4) “로그인” 버튼 클릭 시 실행되는 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      // 반드시 BACKEND_URL을 붙여주세요!
       const res = await axios.post(`${BACKEND_URL}/login2`, form);
-      localStorage.setItem('token', res.data.token);   // 토큰 저장
+      localStorage.setItem('token', res.data.token);
       alert('로그인 성공');
-      navigate('/');                                   // 홈으로 이동
+      navigate('/'); // 로그인 후 메인 페이지로 이동
     } catch (err) {
-      setError('로그인 실패 : 아이디와 패스워드를 다시 확인하세요.');
+      setError('로그인 실패: 아이디와 비밀번호를 다시 확인하세요.');
     }
   };
 
@@ -55,13 +59,15 @@ function Login2(props) {
             type="password"
             name="password"
             id="password"
-            placeholder="패스워드 입력"
+            placeholder="비밀번호 입력"
             value={form.password}
             onChange={handleChange}
             required
           />
         </p>
-        <p><input type="submit" value="로그인" /></p>
+        <p>
+          <input type="submit" value="로그인" />
+        </p>
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <p className="log_p_center">
@@ -96,43 +102,17 @@ function Login2(props) {
           </li>
         </ul>
 
-        <h3>프론트엔드(React)에서 처리</h3>
+        {/* 아래 설명 블록은 빌드에는 영향 주지 않지만, 혹시라도 잘못 닫힌 태그나 오타가 없는지 확인하세요 */}
+        <h3>프론트엔드 설명</h3>
         <ul>
-          <li>로그인 폼 작성 후 회원가입 버튼 클릭 → 회원가입 화면으로 이동</li>
-          <li>회원가입 시 “아이디(username), 패스워드(password), 전화번호(tel), 이메일(email)” 입력</li>
-          <li>로그인 폼에 “아이디, 패스워드” 입력 후 로그인 버튼 클릭 → 서버로 인증 요청</li>
+          <li>로그인 폼에 아이디/패스워드 입력 → “로그인” 누르면 POST /login2 호출</li>
+          <li>성공 시 JWT 토큰을 localStorage에 저장</li>
         </ul>
 
-        <h3>백엔드(Node.js + Express)에서 처리</h3>
+        <h3>백엔드 설명</h3>
         <ul>
-          <li>사용자가 입력한 id, pw를 POST 방식으로 받아서 DB 조회 → 일치 시 JWT 토큰 발급</li>
-          <li>데이터베이스(MYSQL) : 사용자 정보를 저장</li>
-          <li>보안 : 비밀번호는 bcrypt로 암호화, JWT로 인증 유지</li>
+          <li>app.post('/login2', …) 라우터에서 DB 조회 후 bcrypt 검증 → 일치하면 JWT 발급</li>
         </ul>
-
-        <h3>용어 설명</h3>
-        <ul>
-          <li>express : 웹 서버 프레임워크</li>
-          <li>cors : 크로스 도메인 요청 허용</li>
-          <li>mysql : MySQL 연결 라이브러리</li>
-          <li>bcrypt : 비밀번호 해시 처리 라이브러리</li>
-          <li>jsonwebtoken : JWT 생성/검증 라이브러리</li>
-          <li>express.json() : JSON 형식 요청 본문 파싱</li>
-          <li>cors() : CORS 정책 허용</li>
-          <li>bcrypt.compare : 입력 비밀번호와 DB 비밀번호 비교</li>
-        </ul>
-
-        <h3>DB 예시</h3>
-        <pre><code>{`
-          CREATE TABLE users2 (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            username VARCHAR(100) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            tel VARCHAR(255) NOT NULL,
-            datetime TIMESTAMP NOT NULL DEFAULT current_timestamp()
-          );
-        `}</code></pre>
       </form>
     </section>
   );
